@@ -37,6 +37,7 @@ function CreateTodo() {
             body: JSON.stringify({
               title: title,
               description: description,
+              completed:false
             }),
             headers: {
               "Content-type": "application/json",

@@ -1,4 +1,8 @@
 function Todos({ todos }) {
+  function checkCompleted() {
+    console.log(`button value is true`)
+    return true;
+  }
   return (
     <div>
       {todos.map(function (todo) {
@@ -6,7 +10,7 @@ function Todos({ todos }) {
           <div>
             <h1>{todo.title}</h1>
             <h2>{todo.description}</h2>
-            <button>
+            <button onClick={checkCompleted}>
               {todo.completed == true ? "Completed" : "Mark as completed "}
             </button>
           </div>
