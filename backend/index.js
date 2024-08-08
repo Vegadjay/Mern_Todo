@@ -1,13 +1,11 @@
 const express = require("express");
-const { createTodo, updateTodo } = require("./zod");
+const { createTodo } = require("./zod");
 const { todo } = require("./db");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 app.use(bodyParser.json());
-app.use(cors({
-  
-}));
+app.use(cors({}));
 
 app.post("/todo", async (req, res) => {
   const createPayload = req.body;
@@ -17,14 +15,14 @@ app.post("/todo", async (req, res) => {
       msg: "Wrong Inputs",
     });
     return;
-  } // put the todo in mongo db
+  }
   await todo.create({
     title: createPayload.title,
     description: createPayload.description,
     completed: false,
   });
 
-  res.json({  
+  res.json({
     msg: "Todo is created",
   });
 });
