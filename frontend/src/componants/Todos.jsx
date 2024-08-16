@@ -1,8 +1,8 @@
 function Todos({ todos }) {
-  function checkCompleted() {
-    fetch("http://localhost:3000/compeleted").then((res)=>{
-      console.log("Todo Completed")
-      console.log(res)
+  function checkCompleted(id) {
+    
+    fetch("http://localhost:3000/completed").then((res)=>{
+      console.log("Todo completed")
     })
   }
   return (

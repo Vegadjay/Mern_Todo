@@ -3,7 +3,7 @@ import { useState } from "react";
 function CreateTodo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
+  const [todoId, settodoId] = useState(0);
   const changeTitle = (event) => {
     setTitle(event.target.value);
   };
@@ -32,6 +32,7 @@ function CreateTodo() {
           fetch("http://localhost:3000/todo", {
             method: "POST",
             body: JSON.stringify({
+              id:todoId,
               title: title,
               description: description,
               completed:false
@@ -41,9 +42,10 @@ function CreateTodo() {
             },
           }).then(async (res) => {
             const json = await res.json();
-            reloadWindows();
           });
+          settodoId(todoId+1);
         }}
+        
       >
         Add todo
       </button>
