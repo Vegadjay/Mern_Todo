@@ -35,12 +35,6 @@ app.get("/todos", async (req, res) => {
   });
 });
 
-app.delete("/completed/:title", async (req,res)=>{
-  const { title } = req.params;
-  const deletedTodo = await todo.findOne(title);
-  res.status(200).json({ message: 'Todo deleted successfully', deletedTodo });
-})
-
 
 app.listen(3000, () => {
   console.log("Server is started...");

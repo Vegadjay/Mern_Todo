@@ -1,9 +1,6 @@
 function Todos({ todos }) {
   function checkCompleted(id) {
     
-    fetch("http://localhost:3000/completed").then((res)=>{
-      console.log("Todo completed")
-    })
   }
   return (
     <div>

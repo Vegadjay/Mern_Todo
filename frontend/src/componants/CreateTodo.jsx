@@ -3,7 +3,6 @@ import { useState } from "react";
 function CreateTodo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [todoId, settodoId] = useState(0);
   const changeTitle = (event) => {
     setTitle(event.target.value);
   };
@@ -43,7 +42,6 @@ function CreateTodo() {
           }).then(async (res) => {
             const json = await res.json();
           });
-          settodoId(todoId+1);
         }}
         
       >
