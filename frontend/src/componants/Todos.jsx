@@ -1,17 +1,20 @@
 function Todos({ todos }) {
   function checkCompleted() {
-    console.log(`button value is true`)
-    return true;
+    fetch("http://localhost:3000/compeleted").then((res)=>{
+      console.log("Todo Completed")
+      console.log(res)
+    })
   }
   return (
     <div>
-      {todos.map(function (todo) {
+      {todos.map((todo)=> {
         return (
           <div>
             <h1>{todo.title}</h1>
             <h2>{todo.description}</h2>
             <button onClick={checkCompleted}>
-              {todo.completed == true ? "Completed" : "Mark as completed "}
+              {/* {todo.completed == true ? "Completed" : "Mark as completed "} */}
+              Done
             </button>
           </div>
         );

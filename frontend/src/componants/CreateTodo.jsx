@@ -11,9 +11,6 @@ function CreateTodo() {
   const changeDiscription = (event) => {
     setDescription(event.target.value);
   };
-  const reloadWindows = () => {
-    window.location.reload();
-  };
   return (
     <div>
       <input
