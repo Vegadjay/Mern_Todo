@@ -36,12 +36,24 @@ app.get("/todos", async (req, res) => {
   });
 });
 
+const updateData = {
+  completed:true
+}
+
 
 app.put("/todos/:title", async (req, res) => {
-    const findTodo = await todo.find(title,()=>{
-      console.log("Title Finded from the backend");
-    })
-    console.log(findTodo);
+  const title = req.params.title;
+    try { 
+      const updatedData1 = await todo.findOneAndUpdate({title:title},updateData,{new:true})
+      if(updatedData1) {
+        res.json(updatedData1)
+      }
+      else {
+        res.status(404).send("Todo not found")
+      }
+    } catch(e) {
+      console.error(e);
+    }
 });
 
 
