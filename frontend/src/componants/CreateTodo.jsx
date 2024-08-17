@@ -31,7 +31,6 @@ function CreateTodo() {
           fetch("http://localhost:3000/todo", {
             method: "POST",
             body: JSON.stringify({
-              id:todoId,
               title: title,
               description: description,
               completed:false

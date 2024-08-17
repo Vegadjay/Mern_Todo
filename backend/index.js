@@ -1,9 +1,10 @@
 const express = require("express");
-const { createTodo } = require("./zod");
+const { createTodo, updateTodo } = require("./zod"); // Assuming you have a zod schema for updating
 const { todo } = require("./db");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+
 app.use(bodyParser.json());
 app.use(cors({}));
 
@@ -35,6 +36,13 @@ app.get("/todos", async (req, res) => {
   });
 });
 
+
+app.put("/todo/:title", async (req, res) => {
+    const findTodo = await todo.find(title,()=>{
+      console.log("Title Finded from the backend");
+    })
+    console.log(findTodo);
+});
 
 app.listen(3000, () => {
   console.log("Server is started...");

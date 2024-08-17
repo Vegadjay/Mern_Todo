@@ -1,19 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import CreateTodo from "./componants/CreateTodo";
 import Todos from "./componants/Todos";
-import { useEffect } from "react";
-function App() {
-  const [todos, setTodos] = useState([]);
+import axios from 'axios'
+
+function useTodos () {
+    const [todos, setTodos] = useState([]);
+
   useEffect(() => {
-    fetch("http://localhost:3000/todos").then(async (res) => {
-      const data = await res.json();
-      setTodos(data.todos);
+    axios.get("http://localhost:3000/todos").then(async (res) => {
+      setTodos(res.data.todos);
     });
-  }, [todos]);
+  }, []);
+  return todos;
+}
+
+function App() {
+  const todos = useTodos();
+
   return (
     <>
-      <CreateTodo />
+      <CreateTodo todos={todos} />
       <Todos todos={todos} />
     </>
   );
