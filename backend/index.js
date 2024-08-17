@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors({}));
 
-app.post("/todo", async (req, res) => {
+app.post("/todos", async (req, res) => {
   const createPayload = req.body;
   const parsedPayload = createTodo.safeParse(createPayload);
   if (!parsedPayload.success) {
@@ -37,12 +37,18 @@ app.get("/todos", async (req, res) => {
 });
 
 
-app.put("/todo/:title", async (req, res) => {
+app.put("/todos/:title", async (req, res) => {
     const findTodo = await todo.find(title,()=>{
       console.log("Title Finded from the backend");
     })
     console.log(findTodo);
 });
+
+
+app.delete("todos/completed/:id",(req,res)=>{
+  console.log("Delete method called")
+})
+
 
 app.listen(3000, () => {
   console.log("Server is started...");

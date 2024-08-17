@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CreateTodo() {
+function CreateTodo({setCount}) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const changeTitle = (event) => {
@@ -28,7 +28,7 @@ function CreateTodo() {
       <br />
       <button
         onClick={() => {
-          fetch("http://localhost:3000/todo", {
+          fetch("http://localhost:3000/todos", {
             method: "POST",
             body: JSON.stringify({
               title: title,
@@ -41,8 +41,8 @@ function CreateTodo() {
           }).then(async (res) => {
             const json = await res.json();
           });
-        }}
-        
+          setCount((count) => count + 1);
+        }} 
       >
         Add todo
       </button>
