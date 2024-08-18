@@ -50,27 +50,36 @@ function CreateTodo({ setCount }) {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center h-[500px] w-[400px] border border-gray-300 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-6 space-y-4">
+      <header className="text-3xl font-extrabold text-indigo-600">Write Todo Here</header>
       <input
         type="text"
         id="title"
         placeholder="Title"
         value={title}
         onChange={changeTitle}
+        className="w-full px-4 py-2 text-gray-700 bg-white border border-indigo-300 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
       />
-      <br />
       <input
         type="text"
         placeholder="Description"
         id="description"
         value={description}
         onChange={changeDescription}
+        className="w-full px-4 py-2 text-gray-700 bg-white border border-indigo-300 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
       />
-      <br />
-      <button onClick={handleSubmit} disabled={loading}>
-        {loading ? "Adding..." : "Add todo"}
+      <button
+        onClick={handleSubmit}
+        disabled={loading}
+        className="w-full py-2 text-white font-bold bg-indigo-500 rounded-lg hover:bg-indigo-600 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
+      >
+        {loading ? "Adding..." : "Add Todo"}
       </button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && (
+        <p className="mt-4 text-red-600 text-center font-semibold animate-pulse">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
