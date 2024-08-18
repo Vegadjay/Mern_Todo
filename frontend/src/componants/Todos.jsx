@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { PencilIcon, PencilAltIcon, TrashIcon } from "@heroicons/react/solid"; // Import TrashIcon
 
-// Skeleton Loader Component
+
 function SkeletonLoader() {
   return (
     <div className="p-4 bg-white border border-gray-200 rounded-xl shadow-md backdrop-blur-md bg-opacity-30 animate-pulse">
