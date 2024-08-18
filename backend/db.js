@@ -4,11 +4,12 @@ mongoose.connect(
   "mongodb+srv://Todo:JayVegad555@cluster0.nbhadhq.mongodb.net/"
 );
 
-const todoSchema = mongoose.Schema({
+const todoSchema = new mongoose.Schema({
   title: String,
   description: String,
   completed: Boolean,
-});
+}, { timestamps: true }); // Automatically adds createdAt and updatedAt fields
+
 
 const todo = mongoose.model("todos", todoSchema);
 module.exports = {

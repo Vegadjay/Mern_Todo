@@ -1,5 +1,5 @@
 const express = require("express");
-const { createTodo, updateTodo } = require("./zod"); // Assuming you have a zod schema for updating
+const { createTodo, updateTodo } = require("./zod");
 const { todo } = require("./db");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -9,32 +9,30 @@ app.use(bodyParser.json());
 app.use(cors({}));
 
 app.post("/todos", async (req, res) => {
-  const createPayload = req.body;
-  const parsedPayload = createTodo.safeParse(createPayload);
-  if (!parsedPayload.success) {
-    res.status(411).json({
-      msg: "Wrong Inputs",
+  const { title, description, completed } = req.body;
+  try {
+    const newTodo = new todo({
+      title,
+      description,
+      completed,
     });
-    return;
+    await newTodo.save();
+    res.status(201).json(newTodo);
+  } catch (error) {
+    res.status(500).send("Server Error");
   }
-  await todo.create({
-    title: createPayload.title,
-    description: createPayload.description,
-    completed: false,
-  });
-
-  res.json({
-    msg: "Todo is created",
-  });
 });
+
 
 app.get("/todos", async (req, res) => {
-  const todos = await todo.find();
-
-  res.json({
-    todos,
-  });
+  try {
+    const todos = await todo.find();
+    res.json({ todos });
+  } catch (error) {
+    res.status(500).send("Server Error");
+  }
 });
+
 
 const updateData = {
   completed:true
@@ -85,11 +83,20 @@ app.put("/todos/update/:title", async (req, res) => {
   }
 });
 
+app.delete('/todos/delete/:title', async (req, res) => {
+  try {
+    const { title } = req.params;
+    const deletedTodo = await todo.findOneAndDelete({ title });
 
-app.delete("todos/completed/:id",(req,res)=>{
-  console.log("Delete method called")
-})
+    if (!deletedTodo) {
+      return res.status(404).json({ message: 'Todo not found' });
+    }
 
+    res.status(200).json({ message: 'Todo deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 app.listen(3000, () => {
   console.log("Server is started...");
