@@ -57,6 +57,35 @@ app.put("/todos/:title", async (req, res) => {
 });
 
 
+
+app.put("/todos/update/:title", async (req, res) => {
+  const title = req.params.title;
+  const updateData = {
+    title: req.body.title,
+    description: req.body.description,
+
+    ...(req.body.completed !== undefined && { completed: req.body.completed }),
+  };
+
+  try {
+    const updatedTodoData = await todo.findOneAndUpdate(
+      { title: title },
+      updateData,
+      { new: true }
+    );
+
+    if (updatedTodoData) {
+      res.json(updatedTodoData);
+    } else {
+      res.status(404).send("Todo not found");
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("An error occurred while updating the todo");
+  }
+});
+
+
 app.delete("todos/completed/:id",(req,res)=>{
   console.log("Delete method called")
 })

@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
+    "heroicons": "^2.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-loading": "^2.0.3"

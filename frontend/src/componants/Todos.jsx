@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { PencilIcon, PencilAltIcon } from "@heroicons/react/solid";
 
 function Todos({ count }) {
   const [todos, setTodos] = useState([]);
   const [visibleTodos, setVisibleTodos] = useState(10);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editTodo, setEditTodo] = useState(null);
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -43,6 +47,32 @@ function Todos({ count }) {
       });
   };
 
+  const handleEdit = (todo) => {
+    setEditTodo(todo.title);
+    setNewTitle(todo.title);
+    setNewDescription(todo.description);
+  };
+
+  const handleSave = () => {
+    axios
+      .put(`http://localhost:3000/todos/update/${editTodo}`, {
+        title: newTitle,
+        description: newDescription,
+      })
+      .then((res) => {
+        const updatedTodos = todos.map((todo) =>
+          todo.title === editTodo
+            ? { ...todo, title: res.data.title, description: res.data.description }
+            : todo
+        );
+        setTodos(updatedTodos);
+        setEditTodo(null);
+      })
+      .catch(() => {
+        setError("Failed to save changes");
+      });
+  };
+
   const loadMoreTodos = () => {
     setVisibleTodos((prev) => prev + 10);
   };
@@ -69,19 +99,53 @@ function Todos({ count }) {
           key={todo.title}
           className="p-4 bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
         >
-          <h1 className="text-lg md:text-xl font-bold text-indigo-600">Title: {todo.title}</h1>
-          <h2 className="text-sm md:text-lg text-gray-700">Description: {todo.description}</h2>
-          <button
-            onClick={() => handleClick(todo.title)}
-            className={`mt-2 px-3 py-2 md:px-4 md:py-2 text-white font-semibold rounded-lg ${
-              todo.completed
-                ? "bg-green-500 cursor-default"
-                : "bg-indigo-500 hover:bg-indigo-600 transition duration-300"
-            }`}
-            disabled={todo.completed}
-          >
-            {todo.completed ? "Completed" : "Mark as completed"}
-          </button>
+          {editTodo === todo.title ? (
+            <div>
+              <input
+                type="text"
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+                className="w-full mb-2 p-2 border border-gray-300 rounded-lg"
+              />
+              <textarea
+                value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+                className="w-full mb-2 p-2 border border-gray-300 rounded-lg"
+              />
+              <button
+                onClick={handleSave}
+                className="px-3 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition duration-300"
+              >
+                Save
+              </button>
+            </div>
+          ) : (
+            <div>
+              <h1 className="text-lg md:text-xl font-bold text-indigo-600">Title: {todo.title}</h1>
+              <h2 className="text-sm md:text-lg text-gray-700">Description: {todo.description}</h2>
+              <div className="flex space-x-2 mt-2">
+                <button
+                  onClick={() => handleClick(todo.title)}
+                  className={`flex items-center px-3 py-2 md:px-4 md:py-2 text-white font-semibold rounded-lg ${
+                    todo.completed
+                      ? "bg-green-500 cursor-default"
+                      : "bg-indigo-500 hover:bg-indigo-600 transition duration-300"
+                  }`}
+                  disabled={todo.completed}
+                >
+                  <PencilIcon className="h-5 w-5 mr-2" />
+                  {todo.completed ? "Completed" : "Mark as completed"}
+                </button>
+                <button
+                  onClick={() => handleEdit(todo)}
+                  className="flex items-center px-3 py-2 md:px-4 md:py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-lg transition duration-300"
+                >
+                  <PencilAltIcon className="h-5 w-5 mr-2" />
+                  Edit
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       ))}
       {visibleTodos < todos.length && (
