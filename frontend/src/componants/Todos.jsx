@@ -25,7 +25,7 @@ function Todos({ count }) {
     const updatedTodos = todos.map((todo) =>
       todo.title === title ? { ...todo, completed: !todo.completed } : todo
     );
-    
+
     const todoToUpdate = updatedTodos.find((todo) => todo.title === title);
 
     setTodos(updatedTodos);
@@ -39,7 +39,7 @@ function Todos({ count }) {
       })
       .catch(() => {
         setError("Failed to update todo");
-        setTodos(todos); // Revert to the previous state on error
+        setTodos(todos);
       });
   };
 
@@ -62,17 +62,18 @@ function Todos({ count }) {
   if (error) return <p className="text-center text-red-600 font-semibold">{error}</p>;
 
   return (
-    <div className="p-4 bg-gradient-to-b from-green-50 to-blue-50 w-[500px] rounded-lg shadow-xl max-h-screen overflow-y-auto space-y-4">
+    <div className="p-4 bg-gradient-to-b from-green-50 to-blue-50 w-full md:w-[500px] max-w-[90%] rounded-lg shadow-xl max-h-screen overflow-y-auto space-y-4">
+      <h1 className="text-center text-2xl font-extrabold text-indigo-600 mb-4">TODOS</h1>
       {todos.slice(0, visibleTodos).map((todo) => (
         <div
           key={todo.title}
           className="p-4 bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300"
         >
-          <h1 className="text-xl font-bold text-indigo-600">Title: {todo.title}</h1>
-          <h2 className="text-lg text-gray-700">Description: {todo.description}</h2>
+          <h1 className="text-lg md:text-xl font-bold text-indigo-600">Title: {todo.title}</h1>
+          <h2 className="text-sm md:text-lg text-gray-700">Description: {todo.description}</h2>
           <button
             onClick={() => handleClick(todo.title)}
-            className={`mt-2 px-4 py-2 text-white font-semibold rounded-lg ${
+            className={`mt-2 px-3 py-2 md:px-4 md:py-2 text-white font-semibold rounded-lg ${
               todo.completed
                 ? "bg-green-500 cursor-default"
                 : "bg-indigo-500 hover:bg-indigo-600 transition duration-300"
