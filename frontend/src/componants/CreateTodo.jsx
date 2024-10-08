@@ -21,7 +21,7 @@ function CreateTodo({ setCount }) {
     }
 
     setLoading(true);
-    fetch("http://localhost:3000/todos", {
+    fetch("https://todo-app-pqq2.onrender.com/todos", {
       method: "POST",
       body: JSON.stringify({
         title: title,
