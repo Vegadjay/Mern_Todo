@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
+const mongoUrl = process.env.MONGODB_URL_STRING
 
-mongoose.connect(
-  "mongodb+srv://Todo:JayVegad555@cluster0.nbhadhq.mongodb.net/"
-);
+
+mongoose.connect(mongoUrl);
 
 const todoSchema = new mongoose.Schema({
   title: String,
   description: String,
   completed: Boolean,
-}, { timestamps: true }); // Automatically adds createdAt and updatedAt fields
+}, { timestamps: true });
 
 
 const todo = mongoose.model("todos", todoSchema);
