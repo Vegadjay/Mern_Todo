@@ -26,7 +26,7 @@ function Todos({ count }) {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:3000/todos")
+      .get("https://todo-app-pqq2.onrender.com/todos")
       .then((res) => {
         setTodos(res.data.todos);
         setLoading(false);
@@ -47,7 +47,7 @@ function Todos({ count }) {
     setTodos(updatedTodos);
 
     axios
-      .put(`http://localhost:3000/todos/${title}`, {
+      .put(`https://todo-app-pqq2.onrender.com/todos/${title}`, {
         completed: todoToUpdate.completed,
       })
       .then(() => {
@@ -75,7 +75,7 @@ function Todos({ count }) {
     setEditTodo(null);
 
     axios
-      .put(`http://localhost:3000/todos/update/${editTodo}`, {
+      .put(`https://todo-app-pqq2.onrender.com/todos/update/${editTodo}`, {
         title: newTitle,
         description: newDescription,
         completed: false,
