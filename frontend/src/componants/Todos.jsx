@@ -90,7 +90,7 @@ function Todos({ count }) {
 
   const handleDelete = (title) => {
     axios
-      .delete(`http://localhost:3000/todos/delete/${title}`)
+      .delete(`https://todo-app-pqq2.onrender.com/todos/delete/${title}`)
       .then(() => {
         setTodos(todos.filter(todo => todo.title !== title));
         console.log("Todo deleted successfully");
