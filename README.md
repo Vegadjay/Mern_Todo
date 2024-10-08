@@ -81,7 +81,6 @@ Future plans include deploying this project on Vercel.
 
 This is the open source project and include many issue if you want to contribute in this repo simple fork this repo and start solving all the issues and open pull request and start your open source journey from here..
 
-** All the best ** 
 
 ## License
 
