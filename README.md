@@ -27,7 +27,7 @@ This is a full-stack todo application built using the MERN (MongoDB, Express.js,
 
 1. Clone the repository:
    ```
-   git clone [https://github.com/Vegadjay/Mern_Todo.git]
+   git clone https://github.com/Vegadjay/Mern_Todo.git
    ```
 
 2. Frontend setup:
@@ -79,7 +79,9 @@ Future plans include deploying this project on Vercel.
 
 ## Contributing
 
-[Add information about how others can contribute to your project]
+This is the open source project and include many issue if you want to contribute in this repo simple fork this repo and start solving all the issues and open pull request and start your open source journey from here..
+
+** All the best ** 
 
 ## License
 
