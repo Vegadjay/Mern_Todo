@@ -41,7 +41,6 @@ This is a full-stack todo application built using the MERN (MongoDB, Express.js,
    ```
    cd backend
    npm install
-   npm install dotenv
    ```
 
 4. Create a `.env` file in the backend directory and add your MongoDB URL:
