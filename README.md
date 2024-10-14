@@ -70,8 +70,6 @@ Future plans include deploying this project on Vercel.
 
 ## Screenshots
 
-[Note: You mentioned adding 3 screenshots. Once you have these screenshots, you can add them to your project repository and include them in the README like this:]
-
 1. ![Todo List](./imgs/Home_Page.png)
 2. ![Add Todo](./imgs/Update_Todo.png)
 3. ![Edit Todo](./imgs/Update_Todo.png)
